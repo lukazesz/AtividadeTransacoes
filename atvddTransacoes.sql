@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS pedidos (
     quantidade INT
 );
 
-
--- Inserir dados somente se as tabelas estiverem vazias
 INSERT INTO clientes (nome, cidade)
 SELECT 'Ana', 'João Pessoa'
 WHERE NOT EXISTS (SELECT 1 FROM clientes);
@@ -66,36 +64,7 @@ SELECT 'Teclado', 200.00, 15
 WHERE (SELECT COUNT(*) FROM produtos) = 2;
 
 
-INSERT INTO pedidos (cliente_id, produto_id, quantidade)
-SELECT 1, 1, 1
-WHERE NOT EXISTS (SELECT 1 FROM pedidos);
-
-INSERT INTO pedidos (cliente_id, produto_id, quantidade)
-SELECT 2, 2, 2
-WHERE (SELECT COUNT(*) FROM pedidos) = 1;
-
-INSERT INTO pedidos (cliente_id, produto_id, quantidade)
-SELECT 3, 3, 1
-WHERE (SELECT COUNT(*) FROM pedidos) = 2;
-
-
 -- Conferir o banco
 SELECT * FROM clientes;
 SELECT * FROM produtos;
 SELECT * FROM pedidos;
-
-
--- PARTE 2 - EXERCÍCIO 7
--- READ COMMITTED
---
--- Antes de começar:
--- Deixe o preço do Notebook em 3000.
--- Execute a linha abaixo fora de uma transação.
-
-
-/*UPDATE produtos
-SET preco = 3000
-WHERE id = 1;
-*/
-
-
